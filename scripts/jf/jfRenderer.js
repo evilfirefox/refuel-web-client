@@ -12,16 +12,18 @@ var jfRenderer = {
     },
     render: function (template, data) {
         content = template;
-        while ((patternStart = content.indexOf(this.nestedViewPattern)) != -1) {
-            patternEnd = content.indexOf(this.nestedViewPattern, patternStart + 1);
-            originalPath = path = content.substring(patternStart + 1, patternEnd);
-            if ((delimiter = path.indexOf(this.nestedViewDelimiter)) != -1) {
-                dataKey = path.substring(delimiter + 1, patternEnd);
-                path = path.substring(0, delimiter);
-                partialData = (data.hasOwnProperty(dataKey)) ? data[dataKey] : data;
+        // nested template syntax: %template_path|template_param_name% where template_path is relative path to template file itself and
+        // template_param_name (optional) is the property name to pass as data to render method (current data object is passed if not available.
+        while ((patternStart = content.indexOf(this.nestedViewPattern)) != -1) {        // searching for nested templates to render
+            patternEnd = content.indexOf(this.nestedViewPattern, patternStart + 1);     // searching nested template declaration end
+            originalPath = path = content.substring(patternStart + 1, patternEnd);      // getting template path
+            if ((delimiter = path.indexOf(this.nestedViewDelimiter)) != -1) {           // checking if nested template is parametrized
+                dataKey = path.substring(delimiter + 1, patternEnd);                    // getting data key
+                path = path.substring(0, delimiter);                                    // updating path (removing parameter name)
+                partialData = (data.hasOwnProperty(dataKey)) ? data[dataKey] : data;    // retrieving parameter data if available
             }
             template = this.loadTemplate(path);
-            content = content.replace(jfRenderer.nestedViewPattern + originalPath + jfRenderer.nestedViewPattern, this.render(template, partialData));
+            content = content.replace(this.nestedViewPattern + originalPath + this.nestedViewPattern, this.render(template, partialData));
         }
         while ((patternStart = content.indexOf(this.pattern)) != -1) {
             patternEnd = content.indexOf(this.pattern, patternStart + 1);
@@ -30,7 +32,7 @@ var jfRenderer = {
             if (data.hasOwnProperty(key)) {
                 actualValue = data[key];
             }
-            content = content.replace(jfRenderer.pattern + key + jfRenderer.pattern, actualValue);
+            content = content.replace(this.pattern + key + this.pattern, actualValue);
         }
         return content;
     },
