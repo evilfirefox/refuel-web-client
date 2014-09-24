@@ -61,15 +61,15 @@ $(document).ready(function () {
             stations: {
                 update: function () {
                     jfHelper.getAjaxCollection(jfModules.refuel.stationAction.url, function (status, data) {
-                        var template = jfRouter.loadTemplate('dropdown.station-list');
-                        var listTemplate = jfRouter.loadTemplate(jfModules.refuel.stationAction.template);
+                        var template = jfRenderer.loadTemplate('dropdown.station-list');
+                        var listTemplate = jfRenderer.loadTemplate(jfModules.refuel.stationAction.template);
                         var listObject = {
                             stations: ''
                         };
                         for (i in data) {
-                            listObject.stations += jfRouter.render(listTemplate, data[i]);
+                            listObject.stations += jfRenderer.render(listTemplate, data[i]);
                         }
-                        refuel.ui.stations.list.empty().append(jfRouter.render(template, listObject));
+                        refuel.ui.stations.list.empty().append(jfRenderer.render(template, listObject));
                         $(refuel.selectors.items_stations).bind('click', function () {
                             refuel.ui.stations.input_value.attr('value', $(this).attr('data-value'));
                             refuel.ui.stations.input_visible.attr('value', $(this).text());
@@ -103,15 +103,15 @@ $(document).ready(function () {
             fuels: {
                 update: function () {
                     jfHelper.getAjaxCollection(jfModules.refuel.fuelAction.url, function (status, data) {
-                        var template = jfRouter.loadTemplate('dropdown.fuel-list');
-                        var listTemplate = jfRouter.loadTemplate(jfModules.refuel.fuelAction.template);
+                        var template = jfRenderer.loadTemplate('dropdown.fuel-list');
+                        var listTemplate = jfRenderer.loadTemplate(jfModules.refuel.fuelAction.template);
                         var listObject = {
                             fuels: ''
                         };
                         for (i in data) {
-                            listObject.fuels += jfRouter.render(listTemplate, data[i]);
+                            listObject.fuels += jfRenderer.render(listTemplate, data[i]);
                         }
-                        refuel.ui.fuels.list.empty().append(jfRouter.render(template, listObject));
+                        refuel.ui.fuels.list.empty().append(jfRenderer.render(template, listObject));
                         $(refuel.selectors.items_fuels).bind('click', function () {
                             refuel.ui.fuels.input_value.attr('value', $(this).attr('data-value'));
                             refuel.ui.fuels.input_visible.attr('value', $(this).text());

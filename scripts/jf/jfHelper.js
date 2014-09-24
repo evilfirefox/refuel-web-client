@@ -3,27 +3,6 @@
  */
 
 var jfHelper = {
-    getPage: function () {
-        url = document.location.href;
-        return ((index = url.indexOf('#')) != -1) ? url.substring(index + 1) : 'home';
-    },
-    resolvePath: function (type, name) {
-        return jfConfig.routing.baseUrl + type + name + jfConfig.routing.extension;
-    },
-    importTemplate: function (name) {
-        var result;
-        $.ajax(this.resolvePath(jfConfig.routing.templatesPath, name), {
-            method: 'GET',
-            async: false,
-            success: function (data, status, xhr) {
-                result = data;
-            },
-            error: function (xhr, status, error) {
-                jfHelper.writeLog(status, error);
-            }
-        });
-        return result;
-    },
     writeLog: function (status, message) {
         if (jfConfig.general.isDebug) {
             console.log('(' + status + ') ' + message);
@@ -34,10 +13,10 @@ var jfHelper = {
             method: 'GET',
             async: false,
             success: function (data, status, xhr) {
-                var template = jfRouter.importTemplate(templateName);
+                var template = jfRenderer.importTemplate(templateName);
                 targetContainer.empty();
                 for (i in data) {
-                    value = jfRouter.render(template, data[i]);
+                    value = jfRenderer.render(template, data[i]);
                     targetContainer.append(value);
                 }
                 successHandler(status, data);

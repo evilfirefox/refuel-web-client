@@ -17,6 +17,7 @@
 <script type="text/javascript" src="scripts/jf/jfModules.js"></script>
 <script type="text/javascript" src="scripts/jf/jfHelper.js"></script>
 <script type="text/javascript" src="scripts/jf/jfRouter.js"></script>
+<script type="text/javascript" src="scripts/jf/jfRenderer.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var app = {
@@ -44,11 +45,11 @@
             }
         }
         $.address.change(function (evt) {
-            $.ajax(jfHelper.resolvePath(jfConfig.routing.pagesPath, jfHelper.getPage()), {
+            $.ajax(jfRouter.resolvePath(jfConfig.routing.pagesPath, jfRouter.getPage()), {
                 method: 'GET',
                 async: false,
                 success: function (data, status, xhr) {
-                    jfMenu.setActivePage(jfHelper.getPage());
+                    jfMenu.setActivePage(jfRouter.getPage());
                     app.ui.content.empty().append(data);
                 }
             });

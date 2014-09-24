@@ -26,11 +26,11 @@
             },
             renderers: {
                 renderList: function (data) {
-                    var template = jfHelper.importTemplate(jfModules.report.listAction.template);
+                    var template = jfRenderer.importTemplate(jfModules.report.listAction.template);
                     app.ui.import.empty().append(template);
                     app.ui.content.empty();
                     for (i in data) {
-                        app.ui.content.append(jfRouter.render(template, data[i]));
+                        app.ui.content.append(jfRenderer.render(template, data[i]));
                     }
                 }
             }
