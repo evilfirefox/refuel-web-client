@@ -1,4 +1,4 @@
-refule-web-client
+refuel-web-client
 =================
 
 web client app for the Refuel project
