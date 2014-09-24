@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>refuel project</title>
+    <link rel="stylesheet" type="text/css" href="styles/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/refuel.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/jquery.datetimepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/dtp-custom.css"/>
+</head>
+<body>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-migrate.js"></script>
+<script type="text/javascript" src="scripts/jquery.address.js"></script>
+<script type="text/javascript" src="scripts/semantic.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="scripts/jf/jfConfig.js"></script>
+<script type="text/javascript" src="scripts/jf/jfModules.js"></script>
+<script type="text/javascript" src="scripts/jf/jfHelper.js"></script>
+<script type="text/javascript" src="scripts/jf/jfRouter.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var app = {
+            selectors: {
+                links: 'a.item',
+                menu_items: '.main-menu > .item'
+            },
+            ui: {
+                title: $('#title'),
+                content: $('#content-container'),
+                menu: $('.main-menu'),
+                settings: $('#settings'),
+                error: {
+                    container: $('#error_message'),
+                    header: $('#error_message > .content .header'),
+                    body: $('#error_message > .content p')
+                }
+            }
+        }
+        var jfMenu = {
+            setActivePage: function (name) {
+                $(app.selectors.menu_items).removeClass('active');
+                $(app.ui.settings).removeClass('active');
+                $('#' + name).addClass('active');
+            }
+        }
+        $.address.change(function (evt) {
+            $.ajax(jfHelper.resolvePath(jfConfig.routing.pagesPath, jfHelper.getPage()), {
+                method: 'GET',
+                async: false,
+                success: function (data, status, xhr) {
+                    jfMenu.setActivePage(jfHelper.getPage());
+                    app.ui.content.empty().append(data);
+                }
+            });
+        });
+        app.ui.title.bind('click', function () {
+            document.location.href = "http://devastator.dn.ua/";
+        });
+    });
+</script>
+<div class="ui red menu main-menu">
+    <div class="item">
+        <div class="ui mini animated vertical red button" id="title">
+            <div class="visible content">Refuel-project</div>
+            <div class="hidden content">
+                0.1
+            </div>
+        </div>
+    </div>
+    <a class="active item" href="app.html#home" id="home">
+        <i class="home icon"></i> Home
+    </a>
+    <a class="item" href="app.html#refuel" id="refuel">
+        <i class="plus icon"></i> Refuel
+    </a>
+    <a class="item" href="app.html#report" id="report">
+        <i class="table icon"></i> Report
+    </a>
+
+    <div class="right menu">
+        <a class="item" href="app.html#settings" id="settings">
+            <i class="settings icon"></i> Settings
+        </a>
+    </div>
+</div>
+<div class="ui icon red message" id="error_message">
+    <i class="attention icon"></i>
+
+    <div class="content">
+        <div class="header"></div>
+        <p></p>
+    </div>
+</div>
+<div id="content-container">
+</div>
+</body>
+</html>

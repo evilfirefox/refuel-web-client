@@ -1,0 +1,9 @@
+DirectoryIndex app.html
+
+
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule .? - [L]
+    RewriteEngine On
+        RewriteRule .? app.html [L]
+    </IfModule>

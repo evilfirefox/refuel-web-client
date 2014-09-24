@@ -1,0 +1,19 @@
+body {
+    background-color: #E8E8E8;
+}
+
+a {
+    color: #D95C5C;
+}
+
+#error_message {
+    display: none;
+}
+
+#content-container {
+    width: 99% !important;
+}
+
+#dialog_title, #dialog_url {
+    display: none;
+}
