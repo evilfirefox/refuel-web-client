@@ -1,2 +1,6 @@
 .idea
 Thumbs.db
+*.jade~
+*.js~
+*.kate-swp
+*.log
