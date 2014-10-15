@@ -2,6 +2,19 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/semantic.min.css')
   body
-    block content
+    div(class='ui red menu main-menu')
+      div(class='item')
+        div(class='ui mini animated vertical red button', id='title')
+          div(class='visible content') Refuel-project
+          div(class='hidden content') 0.1/0.2
+    div(class='content-container')
+      div(class='ui center aligned column grid')
+        div(class='row')
+          div(class='column')
+          div(class='fourteen wide column')
+            div(class='ui segment')
+              block content
+          div(class='column')
+    

@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  div(class='ui two column middle aligned relaxed grid basic segment')
+    div(class='column')
+      div(class='ui form segment')
+        div(class='field')
+          label Username
+          div(class='ui left labeled icon input')
+            input(placeholder='Username', type='text')
+            i(class='user icon')
+            div(class='ui corner label')
+              i(class='asterisk icon')
+        div(class='field')
+          label Password
+          div(class='ui left labeled icon input')
+            input(placeholder='Password', type='password')
+            i(class='lock icon')
+            div(class='ui corner label')
+              i(class='asterisk icon')
+        div(class='ui blue submit button') Login
+    div(class='ui vertical divider') Or
+    div(class='center aligned column')
+      div(class='huge green ui labeled icon button') 
+        i(class='signup icon')
+        span Sign up
